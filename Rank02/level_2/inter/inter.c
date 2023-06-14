@@ -13,6 +13,7 @@ void	print_chars(char *s1, char *s2)
 		tab[(int)s2[i]] = 1;
 		i++;
 	}
+	i = 0;
 	while (s1[i])
 	{
 		if(tab[(int)s1[i]] == 1)
