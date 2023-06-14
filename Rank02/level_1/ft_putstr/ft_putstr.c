@@ -10,3 +10,10 @@ void	ft_putstr(char *str)
         i++;
     }
 }
+
+// int main(void)
+// {
+// 	char fio[] = "Banana!";
+
+// 	ft_putstr(fio);
+// }

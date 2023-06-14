@@ -1,7 +1,5 @@
 #include <unistd.h>
 
-// A = 65 ; Z = 90
-// a = 97 ; z = 122
 int	main(int ac, char **av)
 {
 	int	i = 0;
@@ -20,3 +18,6 @@ int	main(int ac, char **av)
 	}
 	write(1, "\n", 1);
 }
+
+// A = 65 ; Z = 90
+// a = 97 ; z = 122

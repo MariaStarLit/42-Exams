@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 int	ft_strlen(char *str)
 {
     int i = 0;
@@ -6,3 +8,10 @@ int	ft_strlen(char *str)
         i++;
     return (i);
 }
+
+// int main(void)
+// {
+// 	char fio[] = "Banana!";
+
+// 	printf("len: |%d|\n", ft_strlen(fio));
+// }
