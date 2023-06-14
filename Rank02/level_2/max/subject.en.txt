@@ -1,3 +1,5 @@
+Assignment name  : max
+Expected files   : max.c
 Allowed functions:
 --------------------------------------------------------------------------------
 
