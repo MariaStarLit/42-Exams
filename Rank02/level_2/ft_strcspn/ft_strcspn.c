@@ -3,17 +3,17 @@
 
 size_t	ft_strcspn(const char *s, const char *reject)
 {
-    int	i = 0;
-    int	j;
+	int	i = 0;
+	int	j;
 	int	res = -1;
-	int flag = 1;
+	int	flag = 1;
 
-	while(s[i])
+	while (s[i])
 	{
 		j = 0;
-		while(reject[j] && flag == 1)
+		while (reject[j] && flag == 1)
 		{
-			if(s[i] == reject[j])
+			if (s[i] == reject[j])
 			{
 				res = i;
 				flag = 0;
@@ -23,7 +23,7 @@ size_t	ft_strcspn(const char *s, const char *reject)
 		}
 		i++;
 	}
-	if(res == -1)
+	if (res == -1)
 		return ((size_t)i);
 	else
 		return ((size_t)res);
@@ -32,7 +32,7 @@ size_t	ft_strcspn(const char *s, const char *reject)
 // int	main(void)
 // {
 // 	const char	str[] = "Banana Split";
-// 	const char	r[] = "";
+// 	const char	r[] = " ";
 
 // 	printf("minha_f: |%ld|\n", ft_strcspn(str, r));
 // 	printf("strcspn: |%ld|\n", strcspn(str, r));

@@ -1,16 +1,18 @@
 #include <stdio.h>
 
-char    *ft_strrev(char *str)
+char	*ft_strrev(char *str)
 {
-    int i = 0;
-    int l = 0;
-	int meio;
-	char aux;
+	int		i;
+	int		l;
+	int		meio;
+	char	aux;
 
+	l = 0;
 	while (str[l])
 		l++;
 	meio = l / 2;
 	l -= 1;
+	i = 0;
 	while (i < meio)
 	{
 		aux = str[i];

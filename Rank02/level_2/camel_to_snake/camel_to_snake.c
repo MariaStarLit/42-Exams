@@ -2,13 +2,14 @@
 
 int	main(int ac, char **av)
 {
-	int i = 0;
+	int	i;
 
-	if(ac == 2)
+	if (ac == 2)
 	{
+		i = 0;
 		while (av[1][i])
 		{
-			if(av[1][i] >= 'A' && av[1][i] <= 'Z')
+			if (av[1][i] >= 'A' && av[1][i] <= 'Z')
 			{
 				write(1, "_", 1);
 				av[1][i] += 32;

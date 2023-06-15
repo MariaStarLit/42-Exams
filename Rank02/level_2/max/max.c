@@ -1,12 +1,13 @@
 #include <stdio.h>
 
-int	max(int* tab, unsigned int len)
+int	max(int *tab, unsigned int len)
 {
-	unsigned int	i = 0;
-	int				max = 0; 
+	unsigned int	i;
+	int				max;
 
 	if (!tab)
 		return (0);
+	i = 0;
 	max = tab[i];
 	while (i < len)
 	{
@@ -19,8 +20,8 @@ int	max(int* tab, unsigned int len)
 
 // int	main(void)
 // {
-// 	unsigned int len = 6;
-// 	int numb[] = {0};
+// 	unsigned int	len = 6;
+// 	int				numb[] = {0, -2, 3, 24, 13, -9};
 
 // 	printf("resp: %d\n", max(numb, len));
 // }

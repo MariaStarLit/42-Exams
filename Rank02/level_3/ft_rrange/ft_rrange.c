@@ -1,11 +1,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int find_len(int start, int end)
+int	find_len(int start, int end)
 {
-	int min;
-	int len = 0;
+	int	min;
+	int	len;
 
+	len = 0;
 	if (start < end)
 	{
 		min = start;
@@ -27,13 +28,15 @@ int find_len(int start, int end)
 	return (len);
 }
 
-int     *ft_rrange(int start, int end)
+int	*ft_rrange(int start, int end)
 {
-	int 	len = find_len(start, end);
-	int 	i = 0;
-	int 	*res;
-	int		max;
+	int	len;
+	int	i;
+	int	*res;
+	int	max;
 
+	i = 0;
+	len = find_len(start, end);
 	res = malloc(sizeof(int *) * len);
 	if (!res)
 		return (0);

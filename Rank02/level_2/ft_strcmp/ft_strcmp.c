@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <string.h>
 
-int    ft_strcmp(char *s1, char *s2)
+int	ft_strcmp(char *s1, char *s2)
 {
-	int i = 0;
+	int	i;
 
-	while(s1[i] && s2[i] && s1[i] == s2[i])
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
 		i++;
 	return (s1[i] - s2[i]);
 }
@@ -13,7 +14,7 @@ int    ft_strcmp(char *s1, char *s2)
 // int	main(void)
 // {
 // 	char	a[] = "Banana Split";
-// 	char	b[] = "Banana Spli";
+// 	char	b[] = "Banana Split";
 
 // 	printf("minhaf: |%d|\n", ft_strcmp(a, b));
 // 	printf("strspn: |%d|\n", strcmp(a, b));

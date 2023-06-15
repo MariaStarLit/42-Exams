@@ -1,15 +1,16 @@
 #include <unistd.h>
 
-void union_print(char *s1, char *s2)
+void	union_print(char *s1, char *s2)
 {
-	int tab[126] = {0};
-	int i = 0;
+	int	tab[126] = {0};
+	int	i;
 
-	while(s1[i])
+	i = 0;
+	while (s1[i])
 	{
-		if(tab[(int)s1[i]] == 0)
+		if (tab[(int)s1[i]] == 0)
 			tab[(int)s1[i]] = 1;
-		if(tab[(int)s1[i]] == 1)
+		if (tab[(int)s1[i]] == 1)
 		{
 			write(1, &s1[i], 1);
 			tab[(int)s1[i]] = 2;
@@ -17,11 +18,11 @@ void union_print(char *s1, char *s2)
 		i++;
 	}
 	i = 0;
-	while(s2[i])
+	while (s2[i])
 	{
-		if(tab[(int)s2[i]] == 0)
+		if (tab[(int)s2[i]] == 0)
 			tab[(int)s2[i]] = 1;
-		if(tab[(int)s2[i]] == 1)
+		if (tab[(int)s2[i]] == 1)
 		{
 			write(1, &s2[i], 1);
 			tab[(int)s2[i]] = 2;
@@ -32,7 +33,7 @@ void union_print(char *s1, char *s2)
 
 int	main(int ac, char **av)
 {
-	if(ac == 3)
+	if (ac == 3)
 	{
 		union_print(av[1], av[2]);
 	}

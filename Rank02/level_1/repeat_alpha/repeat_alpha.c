@@ -11,8 +11,9 @@ void	ft_char(int i, char c)
 
 void	repeat_alpha(char *str)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	while (str[i])
 	{
 		if (str[i] >= 'a' && str[i] <= 'z')
@@ -25,7 +26,7 @@ void	repeat_alpha(char *str)
 	}
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	if (argc == 2)
 	{

@@ -2,12 +2,13 @@
 
 int	main(int ac, char **av)
 {
-	int	i = 0;
+	int	i;
 	int	j;
 
 	if (ac == 2)
 	{
-		while(av[1][i])
+		i = 0;
+		while (av[1][i])
 			i++;
 		j = i - 1;
 		while (j >= 0)

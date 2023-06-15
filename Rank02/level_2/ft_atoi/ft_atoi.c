@@ -1,13 +1,16 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int     ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
-	int i = 0;
-	int sinal = 1;
-	int res = 0;
+	int	i;
+	int	sinal;
+	int	res;
 
-	while(str[i] >= 0 && str[i] <= 32)
+	i = 0;
+	sinal = 1;
+	res = 0;
+	while (str[i] >= 0 && str[i] <= 32)
 		i++;
 	if (str[i] == '+')
 		i++;
@@ -16,7 +19,7 @@ int     ft_atoi(const char *str)
 		sinal = -1;
 		i++;
 	}
-	while(str[i] >= '0' && str[i] <= '9')
+	while (str[i] >= '0' && str[i] <= '9')
 	{
 		res = (str[i] - 48) + res * 10;
 		i++;
@@ -26,7 +29,7 @@ int     ft_atoi(const char *str)
 
 // int	main(void)
 // {
-// 	const char	a[] = "  \r\t\n\f -2r24";
+// 	const char	a[] = "  \r\t\n\f -235r24";
 
 // 	printf("mine: %d\n", ft_atoi(a));
 // 	printf("atoi: %d\n", atoi(a));
