@@ -27,10 +27,10 @@ int	ft_atoi(const char *str)
 	return (res * sinal);
 }
 
-// int	main(void)
-// {
-// 	const char	a[] = "  \r\t\n\f -235r24";
+int	main(void)
+{
+	const char	a[] = "  \r\t\n\f -235r24";
 
-// 	printf("mine: %d\n", ft_atoi(a));
-// 	printf("atoi: %d\n", atoi(a));
-// }
+	printf("mine: %d\n", ft_atoi(a));
+	printf("atoi: %d\n", atoi(a));
+}
