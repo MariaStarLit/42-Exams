@@ -16,7 +16,7 @@ int	find_len(int start, int end)
 			min++;
 		}
 	}
-	if (start > end)
+	else
 	{
 		min = end;
 		while (min <= start)
@@ -30,48 +30,40 @@ int	find_len(int start, int end)
 
 int	*ft_rrange(int start, int end)
 {
+	int	*res;
 	int	len;
 	int	i;
-	int	*res;
-	int	max;
-
+	
 	i = 0;
 	len = find_len(start, end);
-	res = malloc(sizeof(int *) * len);
+	printf("len: %d\n", len);
+	res = (int *)malloc(sizeof(int) * len);
 	if (!res)
 		return (0);
-	if (start < end)
+	while (i < len)
 	{
-		max = end;
-		while (i < len)
+		if (end > start)
 		{
-			res[i] = max;
-			max--;
-			i++;
+			res[i] = end;
+			end--;
 		}
-	}
-	if (start > end)
-	{
-		max = start;
-		while (i < len)
+		else
 		{
-			res[i] = max;
-			max--;
-			i++;
+			res[i] = end;
+			end++;
 		}
+		i++;
 	}
 	return (res);
 }
 
 // int	main(void)
 // {
-// 	int s = 0;
-// 	int e = 3;
-// 	int *res = ft_rrange(s, e);
+// 	int *res = ft_rrange(2,2);
 
 // 	while (*res)
 // 	{
-// 		printf("%d, ", *res);
+// 		printf("%d ", *res);
 // 		res++;
 // 	}
 // 	printf("\n");
