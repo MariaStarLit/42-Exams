@@ -2,35 +2,25 @@
 
 unsigned int	lcm(unsigned int a, unsigned int b)
 {
-	unsigned int	ret1;
-	unsigned int	ret2;
+	unsigned int	res;
+	unsigned int	small;
 
 	if (a == 0 || b == 0)
 		return (0);
-
 	if (a > b)
-	{
-		ret1 = a;
-		ret2 = b;
-	}
+		small = b;
 	else
+		small = a;
+	while (small > 0)
 	{
-		ret1 = b;
-		ret2 = a;
+		if (a % small == 0 && b % small == 0)
+			res = small;
+		small--;
 	}
-	while (ret1 != ret2)
-	{
-		while (ret2 < ret1)
-			ret2 += b;
-		if (ret1 == ret2)
-			return (ret1);
-		ret1 += a;
-	}
-	return (ret1);
+	return (res);
 }
 
 // int main()
 // {
-//     int low_multi = lcm(42, 12);
-//     printf("%u\n", low_multi);
+// 	printf ("%u\n", lcm(13, 26));
 // }
