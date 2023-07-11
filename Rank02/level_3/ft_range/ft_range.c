@@ -32,7 +32,7 @@ int	*ft_range(int start, int end)
 {
 	int	*res;
 	int	len;
-	int i;
+	int	i;
 
 	i = 0;
 	len = find_len(start, end);

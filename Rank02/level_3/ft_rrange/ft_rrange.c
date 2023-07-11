@@ -33,7 +33,7 @@ int	*ft_rrange(int start, int end)
 	int	*res;
 	int	len;
 	int	i;
-	
+
 	i = 0;
 	len = find_len(start, end);
 	printf("len: %d\n", len);
