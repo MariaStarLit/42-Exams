@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 
 int	find_len(int n)
 {
@@ -19,24 +20,34 @@ char	*ft_itoa(int nbr)
 {
 	int		i;
 	int		len;
+	int		flag;
 	char	*res;
 
-	i = 0;
+	flag = 0;
 	len = find_len(nbr);
 	res = (char *)malloc(sizeof(char) * (len + 1));
+	if (!res)
+		return (0);
+	res[len] = '\0';
 	if (nbr < 0)
 	{
-		res[i] = '-';
+		res[0] = '-';
 		nbr *= -1;
-		i++;
+		flag = 1;
 	}
-	if (nbr < 10 && nbr >= 0)
-		res[i] = nbr + 48;
-	else
+	i = len - 1;
+	while (i >= 0)
 	{
-		ft_itoa(nbr / 10);
-		ft_itoa(nbr % 10);
+		if (flag == 1 && i == 0)
+			break ;
+		res[i] = nbr % 10 + 48;
+		nbr /= 10;
+		i--;
 	}
 	return (res);
 }
 
+// int	main(void)
+// {
+// 	printf("itoa: |%s|\n", ft_itoa(42));
+// }
