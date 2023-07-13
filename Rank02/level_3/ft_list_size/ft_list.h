@@ -1,7 +1,7 @@
 #ifndef FT_LIST_H
 # define FT_LIST_H
 
-# include <stdio.h>
+# include <stdlib.h>
 
 typedef struct s_list
 {
@@ -9,4 +9,6 @@ typedef struct s_list
 	void			*data;
 }t_list;
 
-#endif	
+int	ft_list_size(t_list *begin_list);
+
+#endif

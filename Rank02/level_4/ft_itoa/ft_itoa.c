@@ -49,5 +49,5 @@ char	*ft_itoa(int nbr)
 
 // int	main(void)
 // {
-// 	printf("itoa: |%s|\n", ft_itoa(42));
+// 	printf("itoa: |%s|\n", ft_itoa(-42));
 // }
