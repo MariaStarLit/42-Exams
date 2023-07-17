@@ -36,7 +36,6 @@ int	*ft_range(int start, int end)
 
 	i = 0;
 	len = find_len(start, end);
-	printf("len: %d\n", len);
 	res = (int *)malloc(sizeof(int) * len);
 	if (!res)
 		return (0);

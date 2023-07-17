@@ -36,7 +36,6 @@ int	*ft_rrange(int start, int end)
 
 	i = 0;
 	len = find_len(start, end);
-	printf("len: %d\n", len);
 	res = (int *)malloc(sizeof(int) * len);
 	if (!res)
 		return (0);
@@ -59,7 +58,7 @@ int	*ft_rrange(int start, int end)
 
 // int	main(void)
 // {
-// 	int *res = ft_rrange(2,2);
+// 	int *res = ft_rrange(-1,-4);
 
 // 	while (*res)
 // 	{
