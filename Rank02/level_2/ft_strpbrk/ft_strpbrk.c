@@ -26,7 +26,7 @@ char	*ft_strpbrk(const char *s1, const char *s2)
 
 // int	main(void)
 // {
-// 	char b[] = " y";
+// 	char b[] = ".";
 // 	char a[] = "Sugar Pie Honney Bone!";
 
 // 	printf("minha_f: |%s|\n", ft_strpbrk(a, b));

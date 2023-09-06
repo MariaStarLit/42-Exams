@@ -14,7 +14,7 @@ void	union_print(char *s1, char *s2)
 		{
 			write(1, &s1[i], 1);
 			tab[(int)s1[i]] = 2;
-		}	
+		}
 		i++;
 	}
 	i = 0;
@@ -26,7 +26,7 @@ void	union_print(char *s1, char *s2)
 		{
 			write(1, &s2[i], 1);
 			tab[(int)s2[i]] = 2;
-		}		
+		}
 		i++;
 	}
 }

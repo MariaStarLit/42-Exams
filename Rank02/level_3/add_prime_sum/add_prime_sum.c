@@ -34,7 +34,7 @@ int	is_prime(int nb)
 
 int	simpler_atoi(const char *str)
 {
-	int i;
+	int	i;
 	int	res;
 
 	i = 0;
@@ -50,13 +50,13 @@ int	simpler_atoi(const char *str)
 int	main(int ac, char **av)
 {
 	int	num;
-	int	res = 0;
+	int res = 0;
 	int prime = 0;
 
 	if (ac == 2 && av[1][0] != '-')
 	{
 		num = simpler_atoi((const char *)av[1]);
-		while(num > 1)
+		while (num > 1)
 		{
 			prime = is_prime(num);
 			if (prime == 1)
@@ -64,7 +64,7 @@ int	main(int ac, char **av)
 			num--;
 		}
 		print_num(res);
-	}	
+	}
 	else
 		write(1, "0", 1);
 	write (1, "\n", 1);

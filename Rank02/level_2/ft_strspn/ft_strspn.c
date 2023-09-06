@@ -32,7 +32,7 @@ size_t	ft_strspn(const char *s, const char *accept)
 // int	main(void)
 // {
 // 	const char	str[] = "Banana Split";
-// 	const char	a[] = "SBan ";
+// 	const char	a[] = "SBan";
 
 // 	printf("minhaf: |%ld|\n", ft_strspn(str, a));
 // 	printf("strspn: |%ld|\n", strspn(str, a));
