@@ -8,7 +8,7 @@ int	find_len(int n)
 	len = 0;
 	if (n <= 0)
 		len++;
-	while (n != 0)
+	while (n)
 	{
 		n /= 10;
 		len++;
