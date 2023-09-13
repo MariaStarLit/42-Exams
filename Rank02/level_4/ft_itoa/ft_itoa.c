@@ -16,38 +16,37 @@ int	find_len(int n)
 	return (len);
 }
 
-char	*ft_itoa(int nbr)
+char *ft_itoa(int nbr) 
 {
-	int		i;
-	int		len;
-	int		flag;
 	char	*res;
+	int		len;
 
-	flag = 0;
+	if (nbr == -2147483648)
+		return ("-2147483648\0");
 	len = find_len(nbr);
 	res = (char *)malloc(sizeof(char) * (len + 1));
-	if (!res)
-		return (0);
+	if (res == NULL) 
+		return (NULL);
 	res[len] = '\0';
-	if (nbr < 0)
+	if (nbr == 0)
+	{
+		res[0] = '0';
+		return (res);
+	}
+	if (nbr < 0) 
 	{
 		res[0] = '-';
-		nbr *= -1;
-		flag = 1;
+		nbr = -nbr;
 	}
-	i = len - 1;
-	while (i >= 0)
+	while (nbr) 
 	{
-		if (flag == 1 && i == 0)
-			break ;
-		res[i] = nbr % 10 + 48;
+		res[--len] = nbr % 10 + '0';
 		nbr /= 10;
-		i--;
 	}
 	return (res);
 }
 
-// int	main(void)
-// {
-// 	printf("itoa: |%s|\n", ft_itoa(-42));
-// }
+int	main(void)
+{
+	printf("itoa: |%s|\n", ft_itoa(-000));
+}
