@@ -25,7 +25,7 @@ char *ft_itoa(int nbr)
 		return ("-2147483648\0");
 	len = find_len(nbr);
 	res = (char *)malloc(sizeof(char) * (len + 1));
-	if (res == NULL) 
+	if (!res) 
 		return (NULL);
 	res[len] = '\0';
 	if (nbr < 0) 
@@ -40,7 +40,7 @@ char *ft_itoa(int nbr)
 	}
 	while (nbr) 
 	{
-		res[--len] = nbr % 10 + '0';
+		res[--len] = nbr % 10 + 48;
 		nbr /= 10;
 	}
 	return (res);
