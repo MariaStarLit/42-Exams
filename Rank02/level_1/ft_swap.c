@@ -7,7 +7,6 @@
 // are passed as parameters.
 
 // Your function must be declared as follows:
-
 // void	ft_swap(int *a, int *b);
 
 #include <stdio.h>
