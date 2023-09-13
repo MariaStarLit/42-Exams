@@ -28,15 +28,15 @@ char *ft_itoa(int nbr)
 	if (res == NULL) 
 		return (NULL);
 	res[len] = '\0';
-	if (nbr == 0)
-	{
-		res[0] = '0';
-		return (res);
-	}
 	if (nbr < 0) 
 	{
 		res[0] = '-';
 		nbr = -nbr;
+	}
+	if (nbr == 0)
+	{
+		res[0] = '0';
+		return (res);
 	}
 	while (nbr) 
 	{
