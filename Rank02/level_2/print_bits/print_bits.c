@@ -18,6 +18,6 @@ void	print_bits(unsigned char octet)
 // {
 // 	unsigned char	byte;
 
-// 	byte = 2;
+// 	byte = 65;
 // 	print_bits(byte);
 // }
