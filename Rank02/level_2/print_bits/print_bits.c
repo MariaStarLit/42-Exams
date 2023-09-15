@@ -8,9 +8,9 @@ void	print_bits(unsigned char octet)
 	i = 8;
 	while (i > 0)
 	{
+		i--;
 		bit = (octet >> i & 1) + '0';
 		write(1, &bit, 1);
-		i--;
 	}
 }
 
@@ -18,6 +18,6 @@ void	print_bits(unsigned char octet)
 // {
 // 	unsigned char	byte;
 
-// 	byte = 5;
+// 	byte = 2;
 // 	print_bits(byte);
 // }
