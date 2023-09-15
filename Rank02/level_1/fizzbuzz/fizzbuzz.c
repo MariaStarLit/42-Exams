@@ -1,21 +1,5 @@
 #include <unistd.h>
 
-// void	charput(char c)
-// {
-// 	write(1, &c, 1);
-// }
-
-// void	digit(int n)
-// {
-// 	if (n < 10)
-// 		charput(n + 48);
-// 	else
-// 	{
-// 		digit(n / 10);
-// 		digit(n % 10);
-// 	}
-// }
-
 void	ft_putnbr(int n)
 {
 	if (n > 9)
