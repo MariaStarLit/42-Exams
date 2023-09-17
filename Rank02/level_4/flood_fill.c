@@ -1,13 +1,14 @@
+/*
 Assignment name  : flood_fill
-Expected files   : *.c, *.h
+Expected files   : flood_fill.c
 Allowed functions: -
 --------------------------------------------------------------------------------
 
-Write a function that takes a char ** as a 2-dimensional array of char, a
+Write a function that takes a char ** as a 2-dimensional array of char, a 
 t_point as the dimensions of this array and a t_point as the starting point.
 
-Starting from the given 'begin' t_point, this function fills an entire zone
-by replacing characters inside with the character 'F'. A zone is an group of
+Starting from the given 'begin' t_point, this function fills an entire zone 
+by replacing characters inside with the character 'F'. A zone is an group of 
 the same character delimitated horizontally and vertically by other characters
 or the array boundry.
 
@@ -16,7 +17,7 @@ The flood_fill function won't fill diagonally.
 The flood_fill function will be prototyped like this:
   void  flood_fill(char **tab, t_point size, t_point begin);
 
-The t_point structure is prototyped like this:
+The t_point structure is prototyped like this: (put it in flood_fill.c)
 
   typedef struct  s_point
   {
@@ -29,7 +30,6 @@ Example:
 $> cat test.c
 #include <stdlib.h>
 #include <stdio.h>
-#include "flood_fill.h"
 
 char** make_area(char** zone, t_point size)
 {
@@ -82,4 +82,32 @@ F000F00F
 F00F000F
 F0FF000F
 FFF0000F
-$>
+$> 
+*/
+
+# include <stdlib.h>
+# include <stdio.h>
+
+typedef struct s_point
+{
+	int		x;
+	int		y;
+}	t_point;
+
+void	fill(char **tab, t_point size, t_point position, char to_fill)
+{
+	if (position.y < 0 || position.y >= size.y || position.x < 0 || position.x >= size.x
+		|| tab[position.y][position.x] != to_fill)
+		return;
+
+	tab[position.y][position.x] = 'F';
+    fill(tab, size, (t_point){position.x, position.y - 1}, to_fill);
+    fill(tab, size, (t_point){position.x - 1, position.y}, to_fill);
+	fill(tab, size, (t_point){position.x, position.y + 1}, to_fill);
+	fill(tab, size, (t_point){position.x + 1, position.y}, to_fill);
+}
+
+void	flood_fill(char **tab, t_point size, t_point begin)
+{
+	fill(tab, size, begin, tab[begin.y][begin.x]);
+}

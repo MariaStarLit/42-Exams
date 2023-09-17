@@ -1,5 +1,5 @@
 // Assignment name  : do_op
-// Expected files   : *.c, *.h
+// Expected files   : do_op.c
 // Allowed functions: atoi, printf, write
 // --------------------------------------------------------------------------------
 
@@ -27,29 +27,29 @@
 // $> ./do_op | cat -e
 // $
 
-#include "do_op.h"
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
 
-int	main(int ac, char **av)
+int main(int ac, char **av)
 {
-	int	res;
-	int	d1;
-	int	d2;
+    int d1;
+    int d2;
 
-	if (ac == 4)
-	{
-		d1 = atoi(av[1]);
-		d2 = atoi(av[3]);
-		if (av[2][0] == '+')
-			res = d1 + d2;
-		if (av[2][0] == '-')
-			res = d1 - d2;
-		if (av[2][0] == '*')
-			res = d1 * d2;
-		if (av[2][0] == '/')
-			res = d1 / d2;
-		if (av[2][0] == '%')
-			res = d1 % d2;
-		printf("%d", res);
-	}
-	printf("\n");
+    if (ac == 4)
+    {
+        d1 = atoi(av[1]);
+        d2 = atoi(av[3]);
+        if (av[2][0] == '+')
+            printf("%d", (d1 + d2));
+        if (av[2][0] == '-')
+            printf("%d", (d1 - d2));
+        if (av[2][0] == '*')
+            printf("%d", (d1 * d2));
+        if (av[2][0] == '/')
+            printf("%d", (d1 / d2));
+        if (av[2][0] == '%')
+            printf("%d", (d1 % d2));
+    }
+    printf("\n");
 }
