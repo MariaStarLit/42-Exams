@@ -33,8 +33,6 @@ char *ft_itoa(int nbr)
 	char	*res;
 	int		len;
 
-	if (nbr == -2147483648)
-		return ("-2147483648\0");
 	len = find_len(nbr);
 	res = (char *)malloc(sizeof(char) * (len + 1));
 	if (!res) 
