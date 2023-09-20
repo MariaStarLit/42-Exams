@@ -1,5 +1,3 @@
-#include <unistd.h>
-
 // Assignment name  : search_and_replace
 // Expected files   : search_and_replace.c
 // Allowed functions: write, exit
@@ -13,7 +11,6 @@
 
 // If the second argument is not contained in the first one (the string)
 // then the program simply rewrites the string followed by a newline.
-
 
 // Examples:
 // $>./search_and_replace "Papache est un sabre" "a" "o"
@@ -29,11 +26,12 @@
 // $>./search_and_replace "wNcOre Un ExEmPle Pas Facilw a Ecrirw " "w" "e" | cat -e
 // eNcOre Un ExEmPle Pas Facile a Ecrire $
 
+#include <unistd.h>
+
 int	main(int ac, char **av)
 {
-	int	i;
+	int	i = 0;
 
-	i = 0;
 	if (ac == 4 && av[2][1] == '\0' && av[3][1] == '\0')
 	{
 		while (av[1][i])
