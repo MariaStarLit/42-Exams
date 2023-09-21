@@ -18,24 +18,22 @@
 //     void          *data;
 // }                 t_list;
 
-#include <stdio.h>
-
 typedef struct    s_list
 {
     struct s_list *next;
     void          *data;
-}   t_list;
+} t_list;
 
 int	ft_list_size(t_list *begin_list)
 {
-    int count = 0;
+    int len = 0;
 
-    if (begin_list == NULL)
+    if (!begin_list)
         return (0);
-    while (begin_list != NULL)
+    while (begin_list)
     {
         begin_list = begin_list->next;
-        count++;
+        len++;
     }
-    return(count);
+    return (len);
 }
