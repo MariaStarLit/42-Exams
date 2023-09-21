@@ -57,8 +57,7 @@ t_list	*sort_list(t_list *lst, int (*cmp)(int, int))
 			lst->next->data = swap;
 			lst = tmp;
 		}
-		else
-			lst = lst->next;
+		lst = lst->next;
 	}
 	lst = tmp;
 	return (lst);
