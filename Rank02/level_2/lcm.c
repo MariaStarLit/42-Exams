@@ -27,14 +27,15 @@
 
 //   unsigned int    lcm(unsigned int a, unsigned int b);
 
-#include<stdio.h>
+#include <stdio.h>
+#include <limits.h>
 
-unsigned int	lcm(unsigned int a, unsigned int b)
+unsigned int    lcm(unsigned int a, unsigned int b)
 {
 	unsigned int	res;
 	unsigned int	small;
 
-	if (a == 0 || b == 0)
+	if (a > (unsigned int)INT_MAX || b > (unsigned int)INT_MAX || a == 0 || b == 0)
 		return (0);
 	if (a > b)
 		small = b;
@@ -46,10 +47,12 @@ unsigned int	lcm(unsigned int a, unsigned int b)
 			res = small;
 		small--;
 	}
+	if (res == 1)
+		return (a * b);
 	return (res);
 }
 
-// int main()
+// int main(void)
 // {
-// 	printf ("%u\n", lcm(13, 26));
+//     printf("%u\n", lcm(-8, 2932));
 // }
