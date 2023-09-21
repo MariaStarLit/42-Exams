@@ -1,8 +1,8 @@
 // Assignment name  : rstr_capitalizer
 // Expected files   : rstr_capitalizer.c
 // Allowed functions: write
-// --------------------------------------------------------------------------------
-
+// -------------------------------------------------------------------------------
+ 
 // Write a program that takes one or more strings and, for each argument, puts 
 // the last character that is a letter of each word in uppercase and the rest
 // in lowercase, then displays the result followed by a \n.

@@ -1,7 +1,7 @@
 // Assignment name  : epur_str
 // Expected files   : epur_str.c
 // Allowed functions: write
-// --------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------
 
 // Write a program that takes a string, and displays this string with exactly one
 // space between words, with no spaces or tabs either at the beginning or the end,
@@ -23,7 +23,7 @@
 // $
 // $> ./epur_str "" | cat -e
 // $
-// $>
+
 
 #include <unistd.h>
 

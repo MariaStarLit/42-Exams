@@ -2,7 +2,7 @@
 // Expected files   : rev_wstr.c
 // Allowed functions: write, malloc, free
 // --------------------------------------------------------------------------------
-
+ 
 // Write a program that takes a string as a parameter, and prints its words in 
 // reverse order.
 

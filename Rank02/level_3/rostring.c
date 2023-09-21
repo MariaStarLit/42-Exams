@@ -2,7 +2,7 @@
 // Expected files   : rostring.c
 // Allowed functions: write, malloc, free
 // --------------------------------------------------------------------------------
-
+ 
 // Write a program that takes a string and displays this string after rotating it
 // one word to the left.
 

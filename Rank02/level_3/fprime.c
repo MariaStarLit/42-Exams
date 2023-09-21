@@ -2,7 +2,7 @@
 // Expected files   : fprime.c
 // Allowed functions: printf, atoi
 // --------------------------------------------------------------------------------
-
+ 
 // Write a program that takes a positive int and displays its prime factors on the
 // standard output, followed by a newline.
 

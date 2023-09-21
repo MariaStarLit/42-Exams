@@ -2,7 +2,7 @@
 // Expected files   : camel_to_snake.c
 // Allowed functions: malloc, free, realloc, write
 // --------------------------------------------------------------------------------
-
+ 
 // Write a program that takes a single string in lowerCamelCase format
 // and converts it into a string in snake_case format.
 

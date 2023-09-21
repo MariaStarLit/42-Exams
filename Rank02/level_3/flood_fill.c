@@ -2,7 +2,7 @@
 Assignment name  : flood_fill
 Expected files   : flood_fill.c
 Allowed functions: -
---------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
 Write a function that takes a char ** as a 2-dimensional array of char, a 
 t_point as the dimensions of this array and a t_point as the starting point.

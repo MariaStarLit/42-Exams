@@ -1,7 +1,7 @@
 // Assignment name  : ft_list_size
 // Expected files   : ft_list_size.c
 // Allowed functions: -
-// --------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------
 
 // Write a function that returns the number of elements in the linked list that's
 // passed to it.

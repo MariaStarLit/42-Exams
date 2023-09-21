@@ -8,7 +8,7 @@
 // Your function must be declared as follows:
 
 // int    ft_strcmp(char *s1, char *s2);
-
+ 
 #include <stdio.h>
 #include <string.h>
 

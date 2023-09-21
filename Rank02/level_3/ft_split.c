@@ -2,7 +2,7 @@
 // Expected files   : ft_split.c
 // Allowed functions: malloc
 // --------------------------------------------------------------------------------
-
+ 
 // Write a function that takes a string, splits it into words, and returns them as
 // a NULL-terminated array of strings.
 

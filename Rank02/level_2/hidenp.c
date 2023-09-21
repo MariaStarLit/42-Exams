@@ -1,7 +1,7 @@
 // Assignment name  : hidenp
 // Expected files   : hidenp.c
 // Allowed functions: write
-// --------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------
 
 // Write a program named hidenp that takes two strings and displays 1
 // followed by a newline if the first string is hidden in the second one,

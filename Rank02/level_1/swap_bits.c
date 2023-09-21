@@ -3,7 +3,7 @@ Assignment name  : swap_bits
 Expected files   : swap_bits.c
 Allowed functions:
 --------------------------------------------------------------------------------
-
+ 
 Write a function that takes a byte, swaps its halves (like the example) and
 returns the result.
 

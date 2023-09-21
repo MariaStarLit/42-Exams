@@ -1,7 +1,7 @@
 // Assignment name  : ft_rrange
 // Expected files   : ft_rrange.c
 // Allowed functions: malloc
-// --------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------
 
 // Write the following function:
 
