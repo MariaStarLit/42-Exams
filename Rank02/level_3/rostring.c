@@ -34,43 +34,56 @@
 // $>
 
 #include <unistd.h>
+#include <stdlib.h>
 
-int	main(int argc, char **argv)
+int	main(int ac, char **av)
 {
 	int	i;
 	int	start;
 	int	end;
 	int	flag;
+	int	print = 0;
 
 	flag = 0;
-	if (argc > 1 && argv[1][0])
-	{
-		i = 0;
-		while (argv[1][i] == ' ' || argv[1][i] == '\t')
-			i++;
-		start = i;
-		while (argv[1][i] != '\0' && argv[1][i] != ' ' && argv[1][i] != '\t')
-			i++;
-		end = i;
-		while (argv[1][i] == ' ' || argv[1][i] == '\t')
-			i++;
-		while (argv[1][i])
-		{
-			while ((argv[1][i] == ' ' && argv[1][i + 1] == ' ')
-				|| (argv[1][i] == '\t' && argv[1][i + 1] == '\t'))
-				i++;
-			if (argv[1][i] == ' ' || argv[1][i] == '\t')
-				flag = 1;
-			write(1, &argv[1][i], 1);
-			i++;
-		}
-		if (flag)
-			write(1, " ", 1);
-		while (start < end)
-		{
-			write(1, &argv[1][start], 1);
-			start++;
-		}
+	if (ac > 1)
+	{		
+            i = 0;
+            while (av[1][i] && (av[1][i] == ' ' || av[1][i] == '\t'))
+                i++;
+            start = i;
+            while (av[1][i] && (av[1][i] != ' ' && av[1][i] != '\t'))
+                i++;
+            end = i;
+            while (av[1][i] && (av[1][i] == ' ' || av[1][i] == '\t'))
+                i++;
+            while (av[1][i])
+            {
+				while (av[1][i] == ' ' || av[1][i] == '\t')
+				{
+					flag = 1;
+					if (av[1][i + 1] != ' ' && av[1][i + 1] != '\t')
+						break ;
+					i++;
+				}
+				if (flag == 1 && av[1][i + 1] != '\0')
+				{
+					flag = 0;
+					write(1, " ", 1);
+				}
+				else if (flag == 0)
+				{
+					write(1, &av[1][i], 1);
+					print = 1;
+				}	
+                i++;
+            }
+			if (print == 1)
+				write(1, " ", 1);
+            while (start < end)
+            {
+                write(1, &av[1][start], 1);
+                start++;
+            }
 	}
 	write(1, "\n", 1);
 	return (0);
