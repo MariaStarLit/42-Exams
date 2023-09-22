@@ -24,12 +24,16 @@
 // }                 t_list;
 
 #include "ft_list.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+void (*f)(void *);
 
 void	ft_list_foreach(t_list *begin_list, void (*f)(void *))
 {
-	t_list	*list_ptr;
+	t_list	*list_ptr = begin_list;
 
-	list_ptr = begin_list;
 	while (list_ptr)
 	{
 		(*f)(list_ptr->data);
