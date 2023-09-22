@@ -12,11 +12,10 @@ int	ft_atoi(const char *str)
 	res = 0;
 	while (str[i] >= 0 && str[i] <= 32)
 		i++;
-	if (str[i] == '+')
-		i++;
-	if (str[i] == '-')
+	if (str[i] == '-' || str[i] == '+')
 	{
-		sinal = -1;
+		if (str[i] == '-')
+			sinal = -1;
 		i++;
 	}
 	while (str[i] >= '0' && str[i] <= '9')
@@ -27,10 +26,10 @@ int	ft_atoi(const char *str)
 	return (res * sinal);
 }
 
-int	main(void)
-{
-	const char	a[] = "  \r\t\n\f -235r24";
+// int	main(void)
+// {
+// 	const char	a[] = "  \r\t\n\f -235r24";
 
-	printf("mine: %d\n", ft_atoi(a));
-	printf("atoi: %d\n", atoi(a));
-}
+// 	printf("mine: %d\n", ft_atoi(a));
+// 	printf("atoi: %d\n", atoi(a));
+// }
