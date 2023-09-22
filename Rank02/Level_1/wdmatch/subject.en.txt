@@ -13,7 +13,7 @@ it simply displays a \n.
 If the number of arguments is not 2, the program displays a \n.
 
 Examples:
-
+ 
 $>./wdmatch "faya" "fgvvfdxcacpolhyghbreda" | cat -e
 faya$
 $>./wdmatch "faya" "fgvvfdxcacpolhyghbred" | cat -e
