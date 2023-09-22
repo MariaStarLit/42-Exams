@@ -11,7 +11,7 @@ the string.
 If the number of parameters is not 1, or there are no words, display a newline.
 
 Example:
-
+ 
 $> ./last_word "FOR PONY" | cat -e
 PONY$
 $> ./last_word "this        ...       is sparta, then again, maybe    not" | cat -e
