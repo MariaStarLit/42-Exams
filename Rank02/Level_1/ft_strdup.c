@@ -15,10 +15,11 @@
 
 char    *ft_strdup(char *src)
 {
-    int		i = 0;
+    int		i;
     int		len;
     char	*res;
 
+    i = 0;
     while (src[i])
         i++;
     len = i;
