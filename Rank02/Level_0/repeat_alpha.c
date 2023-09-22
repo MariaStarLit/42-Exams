@@ -32,7 +32,7 @@
 
 void    print_letter(char c)
 {
-    int i;
+    int i = 0;
 
     if (c >= 'A' && c <= 'Z')
         i = c - 'A';
