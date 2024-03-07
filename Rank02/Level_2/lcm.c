@@ -25,12 +25,12 @@
 
 // Your function must be prototyped as follows:
 
-//   unsigned int    lcm(unsigned int a, unsigned int b);
+//   unsigned int	lcm(unsigned int a, unsigned int b);
 
 #include <stdio.h>
 #include <limits.h>
 
-unsigned int    lcm(unsigned int a, unsigned int b)
+unsigned int	lcm(unsigned int a, unsigned int b)
 {
 	unsigned int	res;
 	unsigned int	small;
@@ -54,5 +54,5 @@ unsigned int    lcm(unsigned int a, unsigned int b)
 
 // int main(void)
 // {
-//     printf("%u\n", lcm(-8, 2932));
+//		printf("%u\n", lcm(-8, 2932));
 // }
