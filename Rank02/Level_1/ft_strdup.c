@@ -7,33 +7,33 @@
 
 // Your function must be declared as follows:
 
-// char    *ft_strdup(char *src);
+// char	*ft_strdup(char *src);
 
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 
-char    *ft_strdup(char *src)
+char	*ft_strdup(char *src)
 {
-    int		i;
-    int		len;
-    char	*res;
+	int		i;
+	int		len;
+	char	*res;
 
-    i = 0;
-    while (src[i])
-        i++;
-    len = i;
-    res = (char *)malloc(sizeof(char) * len);
-    if (!res)
-        return (NULL);
-    i = 0;
-    while (src[i])
-    {
-        res[i] = src[i];
-        i++;
-    }
-    res[i] = '\0';
-    return (res);
+	i = 0;
+	while (src[i])
+		i++;
+	len = i;
+	res = (char *)malloc(sizeof(char) * len);
+	if (!res)
+		return (NULL);
+	i = 0;
+	while (src[i])
+	{
+		res[i] = src[i];
+		i++;
+	}
+	res[i] = '\0';
+	return (res);
 }
 
 // int	main(void)

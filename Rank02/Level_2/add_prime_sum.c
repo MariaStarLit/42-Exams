@@ -23,67 +23,67 @@
 
 #include <unistd.h>
 
-void    ft_putnbr(int n)
+void	ft_putnbr(int n)
 {
-    if (n > 9)
-        ft_putnbr(n / 10);
-    write (1, &"0123456789"[n % 10], 1);
+	if (n > 9)
+		ft_putnbr(n / 10);
+	write (1, &"0123456789"[n % 10], 1);
 }
 
 int is_prime(int n)
 {
-    int prime = 2;
+	int prime = 2;
 
-    if (n < 2)
-        return (0);
-    while (prime <= n / 2)
-    {
-        if (n % prime == 0)
-            return (0);
-        prime++;
-    }
-    return (1);
+	if (n < 2)
+		return (0);
+	while (prime <= n / 2)
+	{
+		if (n % prime == 0)
+			return (0);
+		prime++;
+	}
+	return (1);
 }
 
 int simpler_atoi(char *s)
 {
-    int i = 0;
-    int res = 0;
-    int sinal = 1;
+	int i = 0;
+	int res = 0;
+	int sinal = 1;
 
-    if (s[i] == '+' || s[i] == '-')
-    {
-        if (s[i] == '-')
-            sinal = -1;  
-        i++;
-    }
-    while (s[i] >= '0' && s[i] <= '9')
-    {
-        res = res * 10 + (s[i] - 48);
-        i++;
-    }
-    return (res * sinal);
+	if (s[i] == '+' || s[i] == '-')
+	{
+		if (s[i] == '-')
+			sinal = -1;  
+		i++;
+	}
+	while (s[i] >= '0' && s[i] <= '9')
+	{
+		res = res * 10 + (s[i] - 48);
+		i++;
+	}
+	return (res * sinal);
 }
 
 int main(int ac, char **av)
 {
-    int nb;
-    int n = 2;
-    int res = 0;
+	int nb;
+	int n = 2;
+	int res = 0;
 
-    if (av[1])
-        nb = simpler_atoi(av[1]);
-    if (ac == 2 && nb >= 0)
-    {
-        while (n <= nb)
-        {
-            if (is_prime(n) == 1)
-                res += n;
-            n++;
-        }
-        ft_putnbr(res);
-    }
-    else
-        write (1, "0", 1);
-    write (1, "\n", 1);
+	if (av[1])
+		nb = simpler_atoi(av[1]);
+	if (ac == 2 && nb >= 0)
+	{
+		while (n <= nb)
+		{
+			if (is_prime(n) == 1)
+				res += n;
+			n++;
+		}
+		ft_putnbr(res);
+	}
+	else
+		write (1, "0", 1);
+	write (1, "\n", 1);
 }

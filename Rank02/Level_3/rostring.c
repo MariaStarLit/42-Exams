@@ -20,10 +20,10 @@
 // $>./rostring "abc   " | cat -e
 // abc$
 // $>
-// $>./rostring "Que la      lumiere soit et la lumiere fut"
+// $>./rostring "Que la	  lumiere soit et la lumiere fut"
 // la lumiere soit et la lumiere fut Que
 // $>
-// $>./rostring "     AkjhZ zLKIJz , 23y"
+// $>./rostring "	 AkjhZ zLKIJz , 23y"
 // zLKIJz , 23y AkjhZ
 // $>
 // $>./rostring "first" "2" "11000000"
@@ -47,17 +47,17 @@ int	main(int ac, char **av)
 	flag = 0;
 	if (ac > 1)
 	{		
-            i = 0;
-            while (av[1][i] && (av[1][i] == ' ' || av[1][i] == '\t'))
-                i++;
-            start = i;
-            while (av[1][i] && (av[1][i] != ' ' && av[1][i] != '\t'))
-                i++;
-            end = i;
-            while (av[1][i] && (av[1][i] == ' ' || av[1][i] == '\t'))
-                i++;
-            while (av[1][i])
-            {
+			i = 0;
+			while (av[1][i] && (av[1][i] == ' ' || av[1][i] == '\t'))
+				i++;
+			start = i;
+			while (av[1][i] && (av[1][i] != ' ' && av[1][i] != '\t'))
+				i++;
+			end = i;
+			while (av[1][i] && (av[1][i] == ' ' || av[1][i] == '\t'))
+				i++;
+			while (av[1][i])
+			{
 				while (av[1][i] == ' ' || av[1][i] == '\t')
 				{
 					flag = 1;
@@ -75,15 +75,15 @@ int	main(int ac, char **av)
 					write(1, &av[1][i], 1);
 					print = 1;
 				}	
-                i++;
-            }
+				i++;
+			}
 			if (print == 1)
 				write(1, " ", 1);
-            while (start < end)
-            {
-                write(1, &av[1][start], 1);
-                start++;
-            }
+			while (start < end)
+			{
+				write(1, &av[1][start], 1);
+				start++;
+			}
 	}
 	write(1, "\n", 1);
 	return (0);

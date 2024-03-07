@@ -9,22 +9,22 @@
 
 // Your function must be declared as follows:
 
-// int	    is_power_of_2(unsigned int n);
+// int	is_power_of_2(unsigned int n);
 
 #include <stdio.h>
 
-int	    is_power_of_2(unsigned int n)
+int	is_power_of_2(unsigned int n)
 {
 	int	two = 1;
 
-    while (two <= (int)n)
-    {
-        if (two == (int)n)
-            return (1);
-        two *= 2;
-    }
+	while (two <= (int)n)
+	{
+		if (two == (int)n)
+			return (1);
+		two *= 2;
+	}
 	return (0);
-}gra
+}
 
 // int main(void)
 // {

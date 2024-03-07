@@ -101,8 +101,8 @@ void	fill(char **tab, t_point size, t_point position, char to_fill)
 		return;
 
 	tab[position.y][position.x] = 'F';
-    fill(tab, size, (t_point){position.x, position.y - 1}, to_fill);
-    fill(tab, size, (t_point){position.x - 1, position.y}, to_fill);
+	fill(tab, size, (t_point){position.x, position.y - 1}, to_fill);
+	fill(tab, size, (t_point){position.x - 1, position.y}, to_fill);
 	fill(tab, size, (t_point){position.x, position.y + 1}, to_fill);
 	fill(tab, size, (t_point){position.x + 1, position.y}, to_fill);
 }

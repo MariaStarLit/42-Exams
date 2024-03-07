@@ -37,35 +37,35 @@
 
 void fprime(int nbr)
 {
-    int n = 2;
+	int n = 2;
 
-    if (nbr == 1)
-    {
-        printf("1");
-        return ;
-    } 
-    while (n <= nbr)
-    {
-        if (nbr % n == 0)
-        {
-            printf("%d", n);
-            if (n != nbr)
-                printf("*");
-            nbr /= n;
-            n--;
-        }
-        n++;
-    }
+	if (nbr == 1)
+	{
+		printf("1");
+		return ;
+	} 
+	while (n <= nbr)
+	{
+		if (nbr % n == 0)
+		{
+			printf("%d", n);
+			if (n != nbr)
+				printf("*");
+			nbr /= n;
+			n--;
+		}
+		n++;
+	}
 }
 
 int main(int ac, char **av)
 {
-    int nbr;
+	int nbr;
 
-    if (ac == 2)
-    {
-        nbr = atoi(av[1]);
-        fprime(nbr);
-    }
-    printf("\n");
+	if (ac == 2)
+	{
+		nbr = atoi(av[1]);
+		fprime(nbr);
+	}
+	printf("\n");
 }

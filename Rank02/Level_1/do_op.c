@@ -33,23 +33,23 @@
 
 int main(int ac, char **av)
 {
-    int d1;
-    int d2;
+	int d1;
+	int d2;
 
-    if (ac == 4)
-    {
-        d1 = atoi(av[1]);
-        d2 = atoi(av[3]);
-        if (av[2][0] == '+')
-            printf("%d", (d1 + d2));
-        if (av[2][0] == '-')
-            printf("%d", (d1 - d2));
-        if (av[2][0] == '*')
-            printf("%d", (d1 * d2));
-        if (av[2][0] == '/')
-            printf("%d", (d1 / d2));
-        if (av[2][0] == '%')
-            printf("%d", (d1 % d2));
-    }
-    printf("\n");
+	if (ac == 4)
+	{
+		d1 = atoi(av[1]);
+		d2 = atoi(av[3]);
+		if (av[2][0] == '+')
+			printf("%d", (d1 + d2));
+		if (av[2][0] == '-')
+			printf("%d", (d1 - d2));
+		if (av[2][0] == '*')
+			printf("%d", (d1 * d2));
+		if (av[2][0] == '/')
+			printf("%d", (d1 / d2));
+		if (av[2][0] == '%')
+			printf("%d", (d1 % d2));
+	}
+	printf("\n");
 }

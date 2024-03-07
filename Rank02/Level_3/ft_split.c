@@ -27,13 +27,13 @@ char	*ft_strncpy(char *res, char *str,  int len)
 	return (res);
 }
 
-char    **ft_split(char *str)
+char	**ft_split(char *str)
 {
-    int     i = 0;
-	int     j = 0;
-	int     k = 0;
-	int     n_words = 0;
-    char    **res;
+	int		i = 0;
+	int		j = 0;
+	int		k = 0;
+	int		n_words = 0;
+	char	**res;
 
 	while (str[i])
 	{
