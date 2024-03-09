@@ -27,17 +27,12 @@ out: Hexadecimal for 42 is 2a$
 
 Obs: Your function must not have memory leaks. Moulinette will test that.
 */
+
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdarg.h>
 #include <limits.h>
-
-int	ft_putchar(char c)
-{
-	write(1, &c, 1);
-	return (1);
-}
 
 int	ft_putstr(char *s)
 {
@@ -67,7 +62,7 @@ int	ft_putnbr(int n)
 	{
 		if (n < 0)
 		{
-			ft_putchar('-');
+			write (1, "-", 1);
 			n *= -1;
 			count++;
 		}
@@ -135,9 +130,10 @@ int	main(void)
 	int		n;
 	//char	*str = NULL;
 	
-	n = printf("printf  : |Hexadecimal for %d is %x|", 42, 42);
+	n = printf("printf  : |decimal is %d|", -42);
 	printf(" n: %d\n", n);
-	n = ft_printf("my_print: |Hexadecimal for %d is %x|", 42, 42);
+	n = ft_printf("my_print: |decimal is %d|", -42);
 	printf(" n: %d\n", n);
 	
-}*/
+}
+*/
