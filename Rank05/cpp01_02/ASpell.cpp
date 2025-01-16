@@ -1,12 +1,10 @@
 #include "ASpell.hpp"
 
-ASpell::ASpell() : name("Unknown"), title("Unknown")
+ASpell::ASpell() : _name("Unknown"), _effects("Unknown")
 {}
 
-ASpell::ASpell(std::string name, std::string effects) : _name(n), _effects(e)
-{
-	std::cout << "Spell " << this->_name << ": Created." << std::endl;
-}
+ASpell::ASpell(std::string name, std::string effects) : _name(name), _effects(effects)
+{}
 
 ASpell::ASpell(const ASpell &copy)
 {
@@ -21,16 +19,19 @@ ASpell &ASpell::operator=(const ASpell &copy)
 }
 
 ASpell::~ASpell(void)
-{
-	std::cout << "Spell " << this->_name << ": Destroid." << std::endl;
-}
+{}
 
-std::string const &ASpell::getName() const
+std::string ASpell::getName() const
 {
 	return (this->_name);
 }
 
-std::string const &ASpell::getEffects() const
+std::string ASpell::getEffects() const
 {
 	return (this->_effects);
+}
+
+void	ASpell::launch(const ATarget &target)
+{
+	target.getHitBySpell(*this);
 }
