@@ -15,7 +15,7 @@ int *msgs[65536];
 char buf_read[1001];
 fd_set readfds, writefds, activefds;
 
-
+//Not finised 
 
 int extract_message(char **buf, char **msg)
 {

@@ -72,7 +72,8 @@ void notify_other(int sender_fd, char *msg)
 	}
 }
 
-int countBytes(int i){
+int countBytes(int i)
+{
 	if(i < 10 && i >= 0)
 		return 1;
 	if(i < 100 && i >= 9)
@@ -87,8 +88,7 @@ int countBytes(int i){
 		return 5;
 	if(i < 10000000 && i >= 999999)
 		return 6;
-
-	return 7	
+	return 7;
 }
 
 void register_client(int fd)
@@ -103,10 +103,10 @@ void register_client(int fd)
 	// snprintf(buf, sizeof(buf), "server: client %d just arrived\n", ids[fd]);
 	int len = 29 + (countBytes(ids[fd]));
 	char *wbuf =NULL;
-    wbuf =   malloc(len * sizeof(char));
+	wbuf =   malloc(len * sizeof(char));
 
 	sprintf(wbuf, "server: client %d just arrived\n", ids[fd]);
-                printf("the message being sent from (register_client )is: <%s>\n", wbuf);
+				printf("the message being sent from (register_client )is: <%s>\n", wbuf);
 
 	notify_other(fd, wbuf);
 	free(wbuf);
@@ -118,9 +118,9 @@ void remove_client(int fd)
 	// snprintf(buf, sizeof(buf), "server: client %d just left\n", ids[fd]);
 	int len = 26 + countBytes(ids[fd]);
 	char *wbuf = NULL;
-    wbuf =  malloc(len * sizeof(char));
-            printf("the message being sent from (remove_client )is: <%s>\n", wbuf);
-    sprintf(wbuf, "server: client %d just left\n", ids[fd]);
+	wbuf =  malloc(len * sizeof(char));
+			printf("the message being sent from (remove_client )is: <%s>\n", wbuf);
+	sprintf(wbuf, "server: client %d just left\n", ids[fd]);
 	notify_other(fd, wbuf);
 	free(wbuf);
 	free(msgs[fd]);
@@ -141,7 +141,7 @@ void send_msg(int fd)
 		if (!full_msg)
 			fatal_error();
 		sprintf(full_msg, "client %d: %s", ids[fd], msg);
-        printf("the message being sent from (send_msg )is: <%s>\n", full_msg);
+		printf("the message being sent from (send_msg )is: <%s>\n", full_msg);
 		notify_other(fd, full_msg);
 		free(msg);
 		free(full_msg);
