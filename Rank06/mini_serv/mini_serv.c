@@ -12,9 +12,10 @@ int max_fd = 0;
 int	sockfd;
 int ids[65536];
 int *msgs[65536];
-char buf_read[1001];
-fd_set readfds, writefds, activefds;
 
+fd_set	rfds, wfds, afds;
+
+char buf_read[1001];
 //Not finised 
 
 int extract_message(char **buf, char **msg)
@@ -71,8 +72,6 @@ void fatal_error()
 	exit(1);
 }
 
-int 
-
 int main(int ac, char **av)
 {
 	if (ac != 2)
@@ -82,12 +81,12 @@ int main(int ac, char **av)
 	}
 
     //socket create and verification
-	FD_ZERO(&activefds);
+	FD_ZERO(&afds);
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
 	if (sockfd == -1)
 		fatal_error();
 	max_fd = sockfd;
-	FD_SET(sockfd, &activefds);
+	FD_SET(sockfd, &afds);
 
 	struct  sockaddr_in servaddr; 
 	bzero(&servaddr, sizeof(servaddr));
@@ -103,19 +102,17 @@ int main(int ac, char **av)
 
 	if (listen(sockfd, SOMAXCONN) < 0)
 		fatal_error();
-
  
-
 	while (1)
 	{
-		readfds = activefds;
-		writefds = activefds;
-		if (select(max_fd + 1, &readfds, &writefds, NULL, NULL) < 0)
+		rfds = afds;
+		wfds = afds;
+		if (select(max_fd + 1, &rfds, &wfds, NULL, NULL) < 0)
 			continue;
 
 		for (int fd = 0; fd <= max_fd; fd++)
 		{
-			if (!FD_ISSET(fd, &readfds))
+			if (!FD_ISSET(fd, &rfds))
 			continue;
 
 			if (fd == sockfd)
@@ -132,13 +129,8 @@ int main(int ac, char **av)
 				
 			}
 		}
-
-
-
-
-
-
 	}
+	int connfd;
     if (connfd < 0)
     {
         printf("Server accept failed ...\n");
