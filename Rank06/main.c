@@ -88,7 +88,7 @@ int main(int ac, char **av)
     }
 
     len = sizeof(cli);
-    connfd = accep(sockfd, (struct sockaddr *)&cli, &len);
+    connfd = accept(sockfd, (struct sockaddr *)&cli, &len);
     if (connfd < 0)
     {
         printf("Server accept failed ...\n");
