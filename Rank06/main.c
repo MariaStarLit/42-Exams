@@ -1,5 +1,9 @@
-#include <netinet/ip.h>
+#include <errno.h>
+#include <string.h>
+#include <unistd.h>
+#include <netdb.h>
 #include <sys/select.h>
+#include <netinet/ip.h>
 
 int extract_message(char **buf, char **msg)
 {
@@ -54,14 +58,14 @@ int main(int ac, char **av)
 	struct	sockaddr_in servaddr, cli; 
 
 	//socket create and verification
-	int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+	sockfd = socket(AF_INET, SOCK_STREAM, 0);
 	if (sockfd == -1)
 	{
 		printf("Socket creation failed ...\n");
 		exit(0);
 	}
 	else
-	printf("Socket sucessfully created ...\n"); 
+		printf("Socket sucessfully created ...\n"); 
 	bzero(&servaddr, sizeof(servaddr));
 
 	//assign IP, Port
@@ -91,6 +95,5 @@ int main(int ac, char **av)
 		exit(0);
 	}
 	else
-	printf("Server accepted the client ...\n");
-	return (0);
+		printf("Server accepted the client ...\n");
 }
