@@ -55,7 +55,7 @@ char *str_join(char *buf, char *add)
 int main(int ac, char **av)
 {
 	int		sockfd, connfd, len;
-	struct	sockaddr_in servaddr, cli; 
+	struct	sockaddr_in servaddr, cli;
 
 	//socket create and verification
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
