@@ -5,7 +5,7 @@ strstr, malloc, realloc, free, calloc, bzero, atoi, sprintf, strlen, exit, strcp
 strcat, memset, htons, htonl
 --------------------------------------------------------------------------------------
 
-Write a program that will listen for client to connect on a specific port on 127.0.0.1and allows clients to 
+Write a program that will listen for client to connect on a specific port on 127.0.0.1 and allows clients to 
 communicate with each other.
 
 This program takes the port to bind to as it's first argument.
