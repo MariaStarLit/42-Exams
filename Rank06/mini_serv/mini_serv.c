@@ -7,6 +7,7 @@
 #include <sys/select.h>
 #include <netinet/ip.h>
 
+//                   &msgs[fd]
 int extract_message(char **buf, char **msg)
 {
 	char	*newbuf;
@@ -61,6 +62,13 @@ void error_msg()
 	exit(1);
 }
 
+fd_set rfds, wfds, afds;
+int max_fd;
+int count;
+int ids[6553];
+char *msgs[6553];
+char *read_buf;
+
 int main(int ac, char **av)
 {
 	int		sockfd, connfd, len;
@@ -75,32 +83,22 @@ int main(int ac, char **av)
 	//socket create and verification
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
 	if (sockfd == -1)
-	{
-		printf("Socket creation failed ...\n");
-		exit(0);
-	}
-	else
-		printf("Socket sucessfully created ...\n"); 
-	bzero(&servaddr, sizeof(servaddr));
+		error_msg();
 
+	max_fd = sockfd;
+	FD_SET(sockfd, &afds);
+
+	bzero(&servaddr, sizeof(servaddr));
 	//assign IP, Port
 	servaddr.sin_family = AF_INET;
 	servaddr.sin_addr.s_addr = htonl(2130706433); // 127.0.0.1
-	servaddr.sin_port = htons(8081);
+	servaddr.sin_port = htons(atoi(av[1]));
 
 	//Binding newly created socket to given IP and verifivation
 	if (bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr)) != 0)
-	{
-		printf("Socket bind failed ...\n");
-		exit(0);
-	}
-	else
-		printf("Socket sucessfully binded ...\n"); 
-	if (listen(sockfd, 10) != 0)
-	{
-		printf("Cannot listen.\n");
-		exit(0);
-	}
+		error_msg(); 
+	if (listen(sockfd, SOMAXCONN) != 0)
+		error_msg();
 
 	len = sizeof(cli);
 	connfd = accept(sockfd, (struct sockaddr *)&cli, &len);
