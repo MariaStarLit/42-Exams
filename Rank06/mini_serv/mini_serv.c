@@ -77,19 +77,19 @@ int countBytes(int i)
 {
 	if(i < 10 && i >= 0)
 		return 1;
-	if(i < 100 && i >= 9)
+	if(i < 100 && i > 9)
 		return 2;
-	if(i < 1000 && i >= 99)
+	if(i < 1000 && i > 99)
 		return 3;
-	if(i < 10000 && i >= 999)
+	if(i < 10000 && i > 999)
 		return 4;
-	if(i < 100000 && i >= 9999)
-		return 4;
-	if(i < 1000000 && i >= 99999)
+	if(i < 100000 && i > 9999)
 		return 5;
-	if(i < 10000000 && i >= 999999)
+	if(i < 1000000 && i > 99999)
 		return 6;
-	return 7;
+	if(i < 10000000 && i > 999999)
+		return 7;
+	return 8;
 } //the return is the nbr digits of nbr of clients
 
 void register_client(int fd)
