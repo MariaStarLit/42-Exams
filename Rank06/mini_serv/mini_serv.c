@@ -90,10 +90,13 @@ void	errorMessage()
 
 void	notifyOthers(int fd_sender, char *message)
 {
+	size_t len = strlen(message);
+	printf("---------------len: %ld -------------------\n", len);
+
 	for (int fd = 0; fd <= max_fd; fd++)
 	{
 		if (FD_ISSET(fd, &wfds) && fd != fd_sender && fd != sockfd)
-			send(fd, message, strlen(message), 0);
+			send(fd, message, len, 0);
 	}
 }
 
@@ -111,7 +114,7 @@ void	registerClient(int cli_fd)
 	tmp_msg = malloc(sizeof(char) * len);
 
 	sprintf(tmp_msg, "server: client %d just arrived\n", ids[cli_fd]);
-		//printf("Server accepted the client %d!\n", ids[cli_fd]);
+		printf("Server accepted the client %d!\n", ids[cli_fd]);
 	notifyOthers(cli_fd, tmp_msg);
 	
 	free(tmp_msg);
@@ -124,7 +127,7 @@ void	removeClient(int cli_fd)
 	tmp_msg = malloc(sizeof(char) * len);
 
 	sprintf(tmp_msg, "server: client %d just left\n", ids[cli_fd]);
-		//printf("Client %d left the Server.\n", ids[cli_fd]);
+		printf("Client %d left the Server.\n", ids[cli_fd]);
 	notifyOthers(cli_fd, tmp_msg);
 	
 	free(tmp_msg);
@@ -147,7 +150,7 @@ void	sendMessage(int fd_sender)
 			errorMessage();
 		
 		sprintf(full_msg, "client %d: %s", ids[fd_sender], message);
-			//printf("%s", full_msg);
+			printf("%s", full_msg);
 		notifyOthers(fd_sender, full_msg);
 
 		free(message);
@@ -169,10 +172,10 @@ int main(int ac, char **av)
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
 	if (sockfd == -1)
 	{
-		//("Socket creation failed ...\n");
+		("Socket creation failed ...\n");
 		errorMessage();
 	}
-	//printf("Socket sucessfully created ...\n");
+	printf("Socket sucessfully created ...\n");
 
 	max_fd = sockfd;
 	FD_SET(sockfd, &afds);
@@ -185,17 +188,17 @@ int main(int ac, char **av)
 	//Binding newly created socket to given IP and verifivation
 	if (bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr)) != 0)
 	{
-		//printf("Socket bind failed ...\n");
+		printf("Socket bind failed ...\n");
 		errorMessage();
 	}
-	//printf("Socket sucessfully binded ...\n"); 
+	printf("Socket sucessfully binded ...\n"); 
 	
 	if (listen(sockfd, SOMAXCONN) != 0)
 	{
-		//printf("Socket not listening.\n");
+		printf("Socket not listening.\n");
 		errorMessage();
 	}
-	//printf("Socket listening.\n");
+	printf("Socket listening.\n");
 
 	while (1)
 	{
@@ -215,7 +218,7 @@ int main(int ac, char **av)
 				int cli_fd = accept(sockfd, (struct sockaddr *)&servaddr, &len);
 				if (cli_fd < 0)
 				{
-					//printf("Server accept failed ...\n");
+					printf("Server accept failed ...\n");
 					errorMessage();
 				}
 				registerClient(cli_fd);
