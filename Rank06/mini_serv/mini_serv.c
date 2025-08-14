@@ -1,18 +1,18 @@
 #include <errno.h>
 #include <string.h>
 #include <unistd.h>
+#include <netdb.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <netdb.h>
 #include <sys/select.h>
 #include <netinet/ip.h>
 
 fd_set	rfds, wfds, afds;
-char	read_buf[1001];
+char	readbuf[1001];
 char	*msgs[65536];
 int		ids[65536];
-int		max_fd = 0;
-int		count_ids = 0;
+int		nbr = 0;
+int		maxfd = 0;
 int		sockfd;
 
 int extract_message(char **buf, char **msg)
@@ -63,177 +63,171 @@ char *str_join(char *buf, char *add)
 	return (newbuf);
 }
 
-int countBytes(int n_digits)
+void errorMessage()
 {
-	if (n_digits < 10 && n_digits >= 0)
-		return (1);
-	if (n_digits < 100 && n_digits > 9)
-		return (2);
-	if (n_digits < 1000 && n_digits > 99)
-		return (3);
-	if (n_digits < 10000 && n_digits > 999)
-		return (4);
-	if (n_digits < 100000 && n_digits > 9999)
-		return (5);
-	if (n_digits < 1000000 && n_digits > 99999)
-		return (6);
-	if (n_digits < 10000000 && n_digits > 999999)
-		return (7);
-	return (8);
-}
-
-void	errorMessage()
-{
-	write(2, "Fatal error\n", strlen("Fatal error\n"));
+	write(2, "Fatal error\n", 12);
 	exit(1);
 }
 
-void	notifyOthers(int fd_sender, char *message)
+int	countBytes(int n)
 {
-	size_t len = strlen(message);
-	printf("---------------len: %ld -------------------\n", len);
+	if (n < 10 && n >= 0)
+		return(1);
+	if (n < 100 && n > 9)
+		return(2);
+	if (n < 1000 && n > 99)
+		return(3);
+	if (n < 10000 && n > 999)
+		return(4);
+	if (n < 100000 && n > 9999)
+		return(5);
+	if (n < 1000000 && n > 99999)
+		return(6);
+	if (n < 10000000 && n > 999999)
+		return(7);
+	return(8);
+}
 
-	for (int fd = 0; fd <= max_fd; fd++)
+void	notifyOthers(int senderfd, char *message)
+{
+	for(int fd = 0; fd <= maxfd; fd++)
 	{
-		if (FD_ISSET(fd, &wfds) && fd != fd_sender && fd != sockfd)
-			send(fd, message, len, 0);
+		if (FD_ISSET(fd, &wfds) && fd != sockfd && fd != senderfd)
+			send(fd, message, strlen(message), 0);
 	}
 }
 
-void	registerClient(int cli_fd)
+void	reciveClient(int fd)
 {
-	ids[cli_fd] = count_ids++;
-	msgs[cli_fd] = NULL;
+	ids[fd] = nbr++;
+	msgs[fd] = NULL;
 
-	if (max_fd < cli_fd)
-		max_fd = cli_fd;
-	
-	FD_SET(cli_fd, &afds);
-	char	*tmp_msg = NULL;
-	int		len = 29 + (countBytes(ids[cli_fd]));
-	tmp_msg = malloc(sizeof(char) * len);
+	if (fd > maxfd)
+		maxfd = fd;
 
-	sprintf(tmp_msg, "server: client %d just arrived\n", ids[cli_fd]);
-		printf("Server accepted the client %d!\n", ids[cli_fd]);
-	notifyOthers(cli_fd, tmp_msg);
+	FD_SET(fd, &afds);
 	
-	free(tmp_msg);
+	char *tmp = NULL;
+	size_t len = 29 + countBytes(ids[fd]) + 1;
+	tmp = malloc(sizeof(char) * len);
+
+	sprintf(tmp, "server: client %d just arrived\n", ids[fd]);
+		printf("client %d arrived\n", ids[fd]);
+	notifyOthers(fd, tmp);
+	free(tmp);
 }
 
-void	removeClient(int cli_fd)
+void	removeClient(int fd)
 {
-	char	*tmp_msg = NULL;
-	int		len = 26 + (countBytes(ids[cli_fd]));
-	tmp_msg = malloc(sizeof(char) * len);
+	char *tmp = NULL;
+	size_t len = 26 + countBytes(ids[fd]) + 1;
+	tmp = malloc(sizeof(char) * len);
 
-	sprintf(tmp_msg, "server: client %d just left\n", ids[cli_fd]);
-		printf("Client %d left the Server.\n", ids[cli_fd]);
-	notifyOthers(cli_fd, tmp_msg);
-	
-	free(tmp_msg);
-	free(msgs[cli_fd]);
-	msgs[cli_fd] = NULL;
-	
-	FD_CLR(cli_fd, &afds);
-	close(cli_fd);
+	sprintf(tmp, "server: client %d just left\n", ids[fd]);
+		printf("client %d left\n", ids[fd]);
+	notifyOthers(fd, tmp);
+
+	free(tmp);
+	free(msgs[fd]);
+	msgs[fd] = NULL;
+
+	FD_CLR(fd, &afds);
+	close(fd);
 }
 
-void	sendMessage(int fd_sender)
+void	sendMessage(int fd)
 {
-	char	*message;
-	while (extract_message(&msgs[fd_sender], &message))
+	char *tmp_msg = NULL;
+	char *full_msg = NULL;
+	while(extract_message(&msgs[fd], &tmp_msg))
 	{
-		int		len_std = 9 + countBytes(ids[fd_sender]);
-		int		len_total = len_std + strlen(message);
-		char	*full_msg = malloc(sizeof(char) * len_total);
+		size_t len = 9 + countBytes(ids[fd]);
+		full_msg = malloc(sizeof(char) * (len + strlen(tmp_msg) + 1));
 		if (!full_msg)
 			errorMessage();
-		
-		sprintf(full_msg, "client %d: %s", ids[fd_sender], message);
-			printf("%s", full_msg);
-		notifyOthers(fd_sender, full_msg);
 
-		free(message);
-		free(full_msg);
+		sprintf(full_msg, "client %d: %s", ids[fd], tmp_msg);
+			printf("%s", full_msg);
+		notifyOthers(fd, full_msg);
+		free(tmp_msg);
+		free(full_msg); 
 	}
 }
 
 int main(int ac, char **av)
 {
-	struct	sockaddr_in servaddr;
-
 	if (ac != 2)
 	{
-		write(2, "Wrong number of arguments\n", strlen("Wrong number of arguments\n"));
+		write(2, "Wrong number of arguments\n", 26);
 		exit(1);
 	}
 
 	FD_ZERO(&afds);
+
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
 	if (sockfd == -1)
 	{
-		("Socket creation failed ...\n");
+		printf("Socket creation failed!\n");
 		errorMessage();
 	}
-	printf("Socket sucessfully created ...\n");
-
-	max_fd = sockfd;
+	printf("Socket sucessfully created ...\n"); 
+	
+	maxfd = sockfd;
 	FD_SET(sockfd, &afds);
 
+	struct	sockaddr_in servaddr;
 	bzero(&servaddr, sizeof(servaddr));
 	servaddr.sin_family = AF_INET;
 	servaddr.sin_addr.s_addr = htonl(2130706433); // 127.0.0.1
 	servaddr.sin_port = htons(atoi(av[1]));
 
-	//Binding newly created socket to given IP and verifivation
 	if (bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr)) != 0)
 	{
-		printf("Socket bind failed ...\n");
+		printf("Socket bind failed!\n");
 		errorMessage();
 	}
 	printf("Socket sucessfully binded ...\n"); 
 	
 	if (listen(sockfd, SOMAXCONN) != 0)
 	{
-		printf("Socket not listening.\n");
+		printf("Socket not listening!\n");
 		errorMessage();
 	}
-	printf("Socket listening.\n");
+	printf("Socket listening ...\n");
 
-	while (1)
+	while(1)
 	{
 		rfds = afds;
 		wfds = afds;
 
-		if (select(max_fd + 1, &rfds, &wfds, NULL, NULL) < 0)
+		if (select(maxfd + 1, &rfds, &wfds, NULL, NULL) == -1)
 			continue;
-		for(int fd = 0; fd <= max_fd; fd++)
+		for(int fd = 0; fd <= maxfd; fd++)
 		{
 			if (!FD_ISSET(fd, &rfds))
 				continue;
-
 			if (fd == sockfd)
 			{
 				socklen_t len = sizeof(servaddr);
-				int cli_fd = accept(sockfd, (struct sockaddr *)&servaddr, &len);
-				if (cli_fd < 0)
+				int clifd = accept(sockfd, (struct sockaddr *)&servaddr, &len);
+				if (clifd < 0)
 				{
 					printf("Server accept failed ...\n");
 					errorMessage();
 				}
-				registerClient(cli_fd);
+				reciveClient(clifd);
 				break;
 			}
 			else
 			{
-				int bytes = recv(fd, read_buf, 1000, 0);
+				ssize_t bytes = recv (fd, readbuf, 1000, 0);
 				if (bytes <= 0)
 				{
 					removeClient(fd);
 					break;
 				}
-				read_buf[bytes] = '\0';
-				msgs[fd] = str_join(msgs[fd], read_buf);
+				readbuf[bytes] = '\0';
+				msgs[fd] = str_join(msgs[fd], readbuf);
 				if (!msgs[fd])
 					errorMessage();
 				sendMessage(fd);
