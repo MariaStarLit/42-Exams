@@ -112,7 +112,7 @@ void	reciveClient(int fd)
 	tmp = malloc(sizeof(char) * len);
 
 	sprintf(tmp, "server: client %d just arrived\n", ids[fd]);
-		printf("client %d arrived\n", ids[fd]);
+		// printf("client %d arrived\n", ids[fd]);
 	notifyOthers(fd, tmp);
 	free(tmp);
 }
@@ -124,7 +124,7 @@ void	removeClient(int fd)
 	tmp = malloc(sizeof(char) * len);
 
 	sprintf(tmp, "server: client %d just left\n", ids[fd]);
-		printf("client %d left\n", ids[fd]);
+		// printf("client %d left\n", ids[fd]);
 	notifyOthers(fd, tmp);
 
 	free(tmp);
@@ -147,7 +147,7 @@ void	sendMessage(int fd)
 			errorMessage();
 
 		sprintf(full_msg, "client %d: %s", ids[fd], tmp_msg);
-			printf("%s", full_msg);
+			// printf("%s", full_msg);
 		notifyOthers(fd, full_msg);
 		free(tmp_msg);
 		free(full_msg); 
@@ -167,10 +167,10 @@ int main(int ac, char **av)
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
 	if (sockfd == -1)
 	{
-		printf("Socket creation failed!\n");
+		// printf("Socket creation failed!\n");
 		errorMessage();
 	}
-	printf("Socket sucessfully created ...\n"); 
+	// printf("Socket sucessfully created ...\n"); 
 	
 	maxfd = sockfd;
 	FD_SET(sockfd, &afds);
@@ -183,17 +183,17 @@ int main(int ac, char **av)
 
 	if (bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr)) != 0)
 	{
-		printf("Socket bind failed!\n");
+		// printf("Socket bind failed!\n");
 		errorMessage();
 	}
-	printf("Socket sucessfully binded ...\n"); 
+	// printf("Socket sucessfully binded ...\n"); 
 	
 	if (listen(sockfd, SOMAXCONN) != 0)
 	{
-		printf("Socket not listening!\n");
+		// printf("Socket not listening!\n");
 		errorMessage();
 	}
-	printf("Socket listening ...\n");
+	// printf("Socket listening ...\n");
 
 	while(1)
 	{
@@ -212,7 +212,7 @@ int main(int ac, char **av)
 				int clifd = accept(sockfd, (struct sockaddr *)&servaddr, &len);
 				if (clifd < 0)
 				{
-					printf("Server accept failed ...\n");
+					// printf("Server accept failed ...\n");
 					errorMessage();
 				}
 				reciveClient(clifd);
