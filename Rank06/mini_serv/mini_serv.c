@@ -72,27 +72,27 @@ void errorMessage()
 int	countBytes(int n)
 {
 	if (n < 10 && n >= 0)
-		return(1);
+		return (1);
 	if (n < 100 && n > 9)
-		return(2);
+		return (2);
 	if (n < 1000 && n > 99)
-		return(3);
+		return (3);
 	if (n < 10000 && n > 999)
-		return(4);
+		return (4);
 	if (n < 100000 && n > 9999)
-		return(5);
+		return (5);
 	if (n < 1000000 && n > 99999)
-		return(6);
+		return (6);
 	if (n < 10000000 && n > 999999)
-		return(7);
-	return(8);
+		return (7);
+	return (8);
 }
 
 void	notifyOthers(int senderfd, char *message)
 {
 	for(int fd = 0; fd <= maxfd; fd++)
 	{
-		if (FD_ISSET(fd, &wfds) && fd != sockfd && fd != senderfd)
+		if (FD_ISSET(fd, &wfds) && fd != senderfd && fd != sockfd)
 			send(fd, message, strlen(message), 0);
 	}
 }
@@ -102,7 +102,7 @@ void	reciveClient(int fd)
 	ids[fd] = nbr++;
 	msgs[fd] = NULL;
 
-	if (fd > maxfd)
+	if (maxfd < fd)
 		maxfd = fd;
 
 	FD_SET(fd, &afds);
@@ -112,7 +112,7 @@ void	reciveClient(int fd)
 	tmp = malloc(sizeof(char) * len);
 
 	sprintf(tmp, "server: client %d just arrived\n", ids[fd]);
-		// printf("client %d arrived\n", ids[fd]);
+		printf("client %d arrived\n", ids[fd]);
 	notifyOthers(fd, tmp);
 	free(tmp);
 }
@@ -124,7 +124,7 @@ void	removeClient(int fd)
 	tmp = malloc(sizeof(char) * len);
 
 	sprintf(tmp, "server: client %d just left\n", ids[fd]);
-		// printf("client %d left\n", ids[fd]);
+		printf("client %d left\n", ids[fd]);
 	notifyOthers(fd, tmp);
 
 	free(tmp);
@@ -147,10 +147,10 @@ void	sendMessage(int fd)
 			errorMessage();
 
 		sprintf(full_msg, "client %d: %s", ids[fd], tmp_msg);
-			// printf("%s", full_msg);
+			printf("%s", full_msg);
 		notifyOthers(fd, full_msg);
 		free(tmp_msg);
-		free(full_msg); 
+		free(full_msg);
 	}
 }
 
@@ -167,10 +167,10 @@ int main(int ac, char **av)
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
 	if (sockfd == -1)
 	{
-		// printf("Socket creation failed!\n");
+		printf("Socket creation failed!\n");
 		errorMessage();
 	}
-	// printf("Socket sucessfully created ...\n"); 
+	printf("Socket sucessfully created ...\n"); 
 	
 	maxfd = sockfd;
 	FD_SET(sockfd, &afds);
@@ -183,17 +183,17 @@ int main(int ac, char **av)
 
 	if (bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr)) != 0)
 	{
-		// printf("Socket bind failed!\n");
+		printf("Socket bind failed!\n");
 		errorMessage();
 	}
-	// printf("Socket sucessfully binded ...\n"); 
-	
+	printf("Socket sucessfully binded ...\n"); 
+
 	if (listen(sockfd, SOMAXCONN) != 0)
 	{
-		// printf("Socket not listening!\n");
+		printf("Socket not listening!\n");
 		errorMessage();
 	}
-	// printf("Socket listening ...\n");
+	printf("Socket listening ...\n");
 
 	while(1)
 	{
@@ -202,17 +202,19 @@ int main(int ac, char **av)
 
 		if (select(maxfd + 1, &rfds, &wfds, NULL, NULL) == -1)
 			continue;
+
 		for(int fd = 0; fd <= maxfd; fd++)
 		{
 			if (!FD_ISSET(fd, &rfds))
 				continue;
+
 			if (fd == sockfd)
 			{
 				socklen_t len = sizeof(servaddr);
 				int clifd = accept(sockfd, (struct sockaddr *)&servaddr, &len);
 				if (clifd < 0)
 				{
-					// printf("Server accept failed ...\n");
+					printf("Server accept failed ...\n");
 					errorMessage();
 				}
 				reciveClient(clifd);
@@ -220,7 +222,7 @@ int main(int ac, char **av)
 			}
 			else
 			{
-				ssize_t bytes = recv (fd, readbuf, 1000, 0);
+				ssize_t bytes = recv(fd, readbuf, 1000, 0);
 				if (bytes <= 0)
 				{
 					removeClient(fd);
