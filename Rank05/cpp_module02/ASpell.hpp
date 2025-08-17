@@ -8,8 +8,8 @@ class ATarget;
 class ASpell
 {
 	protected:
-		std::string	_name;
-		std::string	_effects;
+		std::string _name;
+		std::string _effects;
 		ASpell(void);
 
 	public:

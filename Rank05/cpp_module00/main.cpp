@@ -1,6 +1,6 @@
 #include "Warlock.hpp"
 
-int main(void)
+int	main(void)
 {
 	//Warlock bob;
 	// Warlock fred("Fred", "the magnificent");
@@ -17,6 +17,5 @@ int main(void)
 	jack->introduce();
 
 	delete jack;
-
 	return (0);
 }

@@ -17,9 +17,8 @@ SpellBook &SpellBook::operator=(const SpellBook &copy)
 SpellBook::~SpellBook()
 {}
 
-
 //Member functions
-void	SpellBook::learnSpell(ASpell* spell)
+void SpellBook::learnSpell(ASpell* spell)
 {
 	if (spell)
 	{
@@ -27,7 +26,7 @@ void	SpellBook::learnSpell(ASpell* spell)
 	}
 }
 
-void	SpellBook::forgetSpell(std::string const &spell_name)
+void SpellBook::forgetSpell(std::string const &spell_name)
 {
 	if (spell_name.empty())
 		return ;

@@ -7,9 +7,9 @@
 class Warlock
 {
 	private:
-		std::string _name;
-		std::string _title;
-		std::map <std::string, ASpell*> _SpellBook;
+		std::string	_name;
+		std::string	_title;
+		std::map <std::string, ASpell*>	_SpellBook;
 
 		Warlock(void);
 		Warlock(const Warlock &copy);

@@ -17,9 +17,8 @@ TargetGenerator &TargetGenerator::operator=(const TargetGenerator &copy)
 TargetGenerator::~TargetGenerator()
 {}
 
-
 //Member functions
-void	    TargetGenerator::learnTargetType(ATarget* target)
+void TargetGenerator::learnTargetType(ATarget* target)
 {
 	if (target)
 	{
@@ -27,7 +26,7 @@ void	    TargetGenerator::learnTargetType(ATarget* target)
 	}
 }
 
-void	    TargetGenerator::forgetTargetType(std::string const &target)
+void TargetGenerator::forgetTargetType(std::string const &target)
 {
 	if (target.empty())
 		return ;
@@ -35,7 +34,7 @@ void	    TargetGenerator::forgetTargetType(std::string const &target)
 		_TargetG.erase(_TargetG.find(target));
 }
 
-ATarget*	TargetGenerator::createTarget(std::string const &target)
+ATarget* TargetGenerator::createTarget(std::string const &target)
 {
 	ATarget	*tmp = NULL;
 

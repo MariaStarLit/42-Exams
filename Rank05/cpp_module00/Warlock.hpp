@@ -14,6 +14,7 @@ class Warlock
 	public:
 		Warlock(std::string n, std::string t);
 		~Warlock(void);
+
 		//Member functions
 		std::string const &getName() const;
 		std::string const &getTitle() const;

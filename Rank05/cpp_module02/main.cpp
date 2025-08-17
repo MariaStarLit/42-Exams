@@ -8,7 +8,7 @@
 #include "BrickWall.hpp"
 #include "TargetGenerator.hpp"
 
-int main(void)
+int	main(void)
 {
 	Warlock richard("Richard", "foo");
 	richard.setTitle("Hello, I'm Richard the Warlock!");
@@ -29,4 +29,4 @@ int main(void)
 	richard.introduce();
 	richard.launchSpell("Polymorph", *wall);
 	richard.launchSpell("Fireball", *wall);
-	}
+}

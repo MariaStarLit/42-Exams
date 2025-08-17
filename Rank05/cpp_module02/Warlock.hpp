@@ -6,7 +6,6 @@
 #include "ATarget.hpp"
 #include "SpellBook.hpp"
 
-
 class Warlock
 {
 	private:
@@ -21,7 +20,7 @@ class Warlock
 	public:
 		Warlock(std::string name, std::string title);
 		~Warlock(void);
-		
+
 		//Member functions
 		std::string	getName(void) const;
 		std::string	getTitle(void) const;

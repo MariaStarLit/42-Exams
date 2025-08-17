@@ -19,8 +19,8 @@ class ASpell
 		virtual ~ASpell(void);
 
 		//Member functions
-		std::string			getName() const;
-		std::string			getEffects() const;
-		void				launch(const ATarget &target);
-		virtual ASpell*		clone() const = 0;
+		std::string		getName() const;
+		std::string		getEffects() const;
+		void			launch(const ATarget &target);
+		virtual ASpell*	clone() const = 0;
 };

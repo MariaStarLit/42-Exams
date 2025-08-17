@@ -10,8 +10,8 @@ Warlock::Warlock(const Warlock &copy)
 
 Warlock &Warlock::operator=(const Warlock &copy)
 {
-		this->name = copy.name;
-		this->title = copy.title;
+	this->name = copy.name;
+	this->title = copy.title;
 	return (*this);
 }
 
@@ -35,12 +35,12 @@ std::string const &Warlock::getTitle() const
 	return (this->title);
 }
 
-void	Warlock::setTitle(const std::string &t)
+void Warlock::setTitle(const std::string &t)
 {
 	this->title = t;
 }
 
-void	Warlock::introduce() const
+void Warlock::introduce() const
 {
 	std::cout << this->name << ": I am " << this->name << ", " << this->title << "!" << std::endl;
 }

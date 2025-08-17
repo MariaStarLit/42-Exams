@@ -7,7 +7,7 @@ class ASpell;
 class ATarget
 {
 	protected:
-		std::string _type;
+		std::string	_type;
 		ATarget();
 
 	public:
