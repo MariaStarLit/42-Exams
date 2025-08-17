@@ -1,13 +1,13 @@
 #include <errno.h>
 #include <string.h>
 #include <unistd.h>
-#include <netdb.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <netdb.h>
 #include <sys/select.h>
 #include <netinet/ip.h>
 
-fd_set	rfds, wfds, afds;
+fd_set	readfds, writefds, activefds;
 char	readbuf[1001];
 char	*msgs[65536];
 int		ids[65536];
@@ -92,7 +92,7 @@ void	notifyOthers(int senderfd, char *message)
 {
 	for(int fd = 0; fd <= maxfd; fd++)
 	{
-		if (FD_ISSET(fd, &wfds) && fd != senderfd && fd != sockfd)
+		if (FD_ISSET(fd, &writefds) && fd != senderfd && fd != sockfd)
 			send(fd, message, strlen(message), 0);
 	}
 }
@@ -105,14 +105,14 @@ void	reciveClient(int fd)
 	if (maxfd < fd)
 		maxfd = fd;
 
-	FD_SET(fd, &afds);
+	FD_SET(fd, &activefds);
 	
 	char *tmp = NULL;
 	size_t len = 29 + countBytes(ids[fd]) + 1;
 	tmp = malloc(sizeof(char) * len);
 
 	sprintf(tmp, "server: client %d just arrived\n", ids[fd]);
-		printf("client %d arrived\n", ids[fd]);
+		// printf("* %s", tmp);
 	notifyOthers(fd, tmp);
 	free(tmp);
 }
@@ -124,14 +124,14 @@ void	removeClient(int fd)
 	tmp = malloc(sizeof(char) * len);
 
 	sprintf(tmp, "server: client %d just left\n", ids[fd]);
-		printf("client %d left\n", ids[fd]);
+		// printf("* %s", tmp);
 	notifyOthers(fd, tmp);
 
 	free(tmp);
 	free(msgs[fd]);
 	msgs[fd] = NULL;
 
-	FD_CLR(fd, &afds);
+	FD_CLR(fd, &activefds);
 	close(fd);
 }
 
@@ -139,6 +139,7 @@ void	sendMessage(int fd)
 {
 	char *tmp_msg = NULL;
 	char *full_msg = NULL;
+
 	while(extract_message(&msgs[fd], &tmp_msg))
 	{
 		size_t len = 9 + countBytes(ids[fd]);
@@ -147,13 +148,18 @@ void	sendMessage(int fd)
 			errorMessage();
 
 		sprintf(full_msg, "client %d: %s", ids[fd], tmp_msg);
-			printf("%s", full_msg);
+			// printf("* %s", full_msg);
 		notifyOthers(fd, full_msg);
 		free(tmp_msg);
 		free(full_msg);
 	}
 }
 
+/* Note:
+	For the exam, remove all 'printf' comments when submitting for grading.
+	Make sure there are no useless lines of code that aren't doing anything (I don't mean empty lines).
+	Be careful with memory allocation, you shouldn't have any buffers with empty spaces.
+*/
 int main(int ac, char **av)
 {
 	if (ac != 2)
@@ -162,18 +168,18 @@ int main(int ac, char **av)
 		exit(1);
 	}
 
-	FD_ZERO(&afds);
+	FD_ZERO(&activefds);
 
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
 	if (sockfd == -1)
 	{
-		printf("Socket creation failed!\n");
+		// printf("Socket creation failed :(\n");
 		errorMessage();
 	}
-	printf("Socket sucessfully created ...\n"); 
+	// printf("Socket sucessfully created ...\n"); 
 	
 	maxfd = sockfd;
-	FD_SET(sockfd, &afds);
+	FD_SET(sockfd, &activefds);
 
 	struct	sockaddr_in servaddr;
 	bzero(&servaddr, sizeof(servaddr));
@@ -183,29 +189,29 @@ int main(int ac, char **av)
 
 	if (bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr)) != 0)
 	{
-		printf("Socket bind failed!\n");
+		// printf("Socket bind failed :(\n");
 		errorMessage();
 	}
-	printf("Socket sucessfully binded ...\n"); 
+	// printf("Socket sucessfully binded ...\n"); 
 
 	if (listen(sockfd, SOMAXCONN) != 0)
 	{
-		printf("Socket not listening!\n");
+		// printf("Socket not listening :(\n");
 		errorMessage();
 	}
-	printf("Socket listening ...\n");
+	// printf("Socket listening ...\n");
 
 	while(1)
 	{
-		rfds = afds;
-		wfds = afds;
+		readfds = activefds;
+		writefds = activefds;
 
-		if (select(maxfd + 1, &rfds, &wfds, NULL, NULL) == -1)
+		if (select(maxfd + 1, &readfds, &writefds, NULL, NULL) == -1)
 			continue;
 
 		for(int fd = 0; fd <= maxfd; fd++)
 		{
-			if (!FD_ISSET(fd, &rfds))
+			if (!FD_ISSET(fd, &readfds))
 				continue;
 
 			if (fd == sockfd)
@@ -214,7 +220,7 @@ int main(int ac, char **av)
 				int clifd = accept(sockfd, (struct sockaddr *)&servaddr, &len);
 				if (clifd < 0)
 				{
-					printf("Server accept failed ...\n");
+					// printf("Server accept failed :(\n");
 					errorMessage();
 				}
 				reciveClient(clifd);
