@@ -51,7 +51,6 @@ char *str_join(char *buf, char *add)
 	return (newbuf);
 }
 
-
 int main()
 {
 	int		sockfd, connfd, len;
@@ -59,12 +58,10 @@ int main()
 
 	//socket create and verification
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
-	if (sockfd == -1)
-	{
+	if (sockfd == -1) {
 		printf("Socket creation failed ...\n");
 		exit(0);
-	}
-	else
+	} else
 		printf("Socket sucessfully created ...\n"); 
 	bzero(&servaddr, sizeof(servaddr));
 
@@ -74,26 +71,21 @@ int main()
 	servaddr.sin_port = htons(8081);
 
 	//Binding newly created socket to given IP and verifivation
-	if (bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr)) != 0)
-	{
+	if (bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr)) != 0) {
 		printf("Socket bind failed ...\n");
 		exit(0);
-	}
-	else
+	} else
 		printf("Socket sucessfully binded ...\n"); 
-	if (listen(sockfd, 10) != 0)
-	{
+	if (listen(sockfd, 10) != 0) {
 		printf("Cannot listen.\n");
 		exit(0);
 	}
 
 	len = sizeof(cli);
 	connfd = accept(sockfd, (struct sockaddr *)&cli, &len);
-	if (connfd < 0)
-	{
+	if (connfd < 0) {
 		printf("Server accept failed ...\n");
 		exit(0);
-	}
-	else
+	} else
 		printf("Server accepted the client ...\n");
 }
