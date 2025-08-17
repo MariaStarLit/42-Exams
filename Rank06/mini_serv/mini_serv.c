@@ -155,7 +155,7 @@ void	sendMessage(int fd)
 	}
 }
 
-/* Note:
+/* Note 1:
 	For the exam, remove all 'printf' comments when submitting for grading.
 	Make sure there are no useless lines of code that aren't doing anything (I don't mean empty lines).
 	Be careful with memory allocation, you shouldn't have any buffers with empty spaces.
@@ -244,3 +244,31 @@ int main(int ac, char **av)
 	}
 	return (0);
 }
+
+/* For testing:
+
+	Terminal 1 -> server
+		$ gcc -Wall -Wextra -Werror mini_serv.c
+		$ ./a.out 8081
+	  Ctrl C
+
+	Terminal 2 -> client 0
+		$ nc 127.0.0.1 8081
+	  server: client 1 just arrived
+	  Hi! How are you?
+	  client 1: I'm good! You?
+	  .......
+	  Ctrl C
+	
+	Terminal 3 -> client 1
+		$ nc 127.0.0.1 8081
+	  client 0: Hi! How are you?
+	  I'm good! You?
+	  .......
+	  Ctrl C
+
+  * Note 2:
+	  Make sure you exit all clients before exiting the server, 
+	otherwise you will have memory leaks and a problem with the
+	port, the next time you try teste the program.
+*/
