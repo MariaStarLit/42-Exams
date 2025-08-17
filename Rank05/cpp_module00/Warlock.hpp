@@ -1,4 +1,4 @@
-#pragma once
+#pragma once 
 
 #include <iostream>
 
@@ -16,8 +16,8 @@ class Warlock
 		~Warlock(void);
 
 		//Member functions
-		std::string const &getName() const;
-		std::string const &getTitle() const;
-		void	setTitle(const std::string &t);
-		void	introduce(void) const;
+		std::string	const &getName() const;
+		std::string	const &getTitle() const;
+		void		setTitle(const std::string &t);
+		void		introduce(void) const;
 };
