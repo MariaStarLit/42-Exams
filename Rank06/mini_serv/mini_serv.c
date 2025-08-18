@@ -88,7 +88,7 @@ int	countBytes(int n)
 	return (8);
 }
 
-void	notifyOthers(int senderfd, char *message)
+void notifyOthers(int senderfd, char *message)
 {
 	for(int fd = 0; fd <= maxfd; fd++)
 	{
@@ -97,7 +97,7 @@ void	notifyOthers(int senderfd, char *message)
 	}
 }
 
-void	reciveClient(int fd)
+void reciveClient(int fd)
 {
 	ids[fd] = nbr++;
 	msgs[fd] = NULL;
@@ -117,7 +117,7 @@ void	reciveClient(int fd)
 	free(tmp);
 }
 
-void	removeClient(int fd)
+void removeClient(int fd)
 {
 	char *tmp = NULL;
 	size_t len = 26 + countBytes(ids[fd]) + 1;
@@ -135,7 +135,7 @@ void	removeClient(int fd)
 	close(fd);
 }
 
-void	sendMessage(int fd)
+void sendMessage(int fd)
 {
 	char *tmp_msg = NULL;
 	char *full_msg = NULL;
